@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F0F9FF">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#031122">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>History — RiverGuard AI</title>
+  <script>document.documentElement.dataset.theme = localStorage.getItem('riverguard_theme') || 'light';</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="appHeader"></div>
+
+  <main class="page page-wide">
+    <header class="page-header">
+      <div>
+        <span class="eyebrow"><i class="fas fa-database"></i> Telemetry Archive</span>
+        <h1 class="page-title">Analysis History &amp; Audit Log</h1>
+        <p class="page-subtitle">
+          Chronological record of historical extractions, waterline calibrations, and risk evaluations.
+        </p>
+      </div>
+
+      <div class="page-actions">
+        <a href="upload.html" class="btn btn-primary">
+          <i class="fas fa-camera"></i> Scan River
+        </a>
+      </div>
+    </header>
+
+    <!-- Search & Filter Bar -->
+    <div class="card card-pad mb-4">
+      <div class="row-between row-wrap">
+        <div style="flex:1; min-width:280px;">
+          <input type="text" id="searchHistoryInput" class="input" placeholder="Search by filename, date, or risk...">
+        </div>
+
+        <div class="row">
+          <span class="text-xs text-muted text-strong">FILTER RISK:</span>
+          <select id="filterRiskSelect" class="select" style="width:200px;">
+            <option value="ALL">All Risk Levels</option>
+            <option value="SAFE">Normal Water (Safe)</option>
+            <option value="WATCH">Watch Advisory</option>
+            <option value="WARNING">Warning</option>
+            <option value="EMERGENCY">Emergency</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- History Table -->
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Water Level</th>
+            <th>Risk Status</th>
+            <th>Confidence</th>
+            <th>Reference</th>
+            <th>HUD Overlay</th>
+            <th style="text-align:right;">Action</th>
+          </tr>
+        </thead>
+        <tbody id="historyTableBody">
+          <tr>
+            <td colspan="8" class="text-center text-muted" style="padding:28px;">
+              <i class="fas fa-circle-notch fa-spin text-accent"></i> Loading analysis history...
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <script src="js/app.js"></script>
+  <script src="js/history.js"></script>
+</body>
+</html>

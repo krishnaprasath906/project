@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F0F9FF">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#031122">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Advanced Analysis — RiverGuard AI</title>
+  <script>document.documentElement.dataset.theme = localStorage.getItem('riverguard_theme') || 'light';</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="appHeader"></div>
+
+  <main class="page page-wide">
+    <header class="page-header">
+      <div>
+        <span class="eyebrow"><i class="fas fa-chart-line"></i> Hydrological Diagnostics</span>
+        <h1 class="page-title">AI Analysis Complete</h1>
+        <p class="page-subtitle">
+          Computer vision extraction report &bull; Edge detection, waterline calibration, and risk evaluation.
+        </p>
+      </div>
+
+      <div class="page-actions">
+        <button onclick="openTechModal()" class="btn btn-secondary">
+          <i class="fas fa-code-branch"></i> View Technical Details
+        </button>
+        <a href="upload.html" class="btn btn-primary">
+          <i class="fas fa-redo"></i> Ingest Next Image
+        </a>
+      </div>
+    </header>
+
+    <div class="grid-main-aside" id="analysisMainContainer">
+
+      <!-- LEFT: Annotated Image Viewport -->
+      <div class="card" style="background:#0B1220; overflow:hidden;">
+        <div class="card-header" style="background:rgba(15,23,42,0.85); border-color:rgba(255,255,255,0.08);">
+          <span class="mono text-xs text-accent">
+            <i class="fas fa-eye"></i> ANNOTATED HUD VIEWPORT
+          </span>
+          <span class="mono text-xs text-faint" id="resTime">
+            Telemetry active
+          </span>
+        </div>
+        
+        <img id="analysisAnnotatedImg" src="" alt="AI Computer Vision Annotated River Image" style="width:100%; height:auto; display:block;">
+      </div>
+
+      <!-- RIGHT: Results & Status -->
+      <div class="stack">
+
+        <!-- Water Level & Risk Card -->
+        <div class="card card-pad">
+          <div class="row-between mb-2">
+            <span class="mono text-xs text-muted">WATER LEVEL</span>
+            <span class="badge badge-safe" id="resStatusBadge">● NORMAL WATER</span>
+          </div>
+          <div class="stat-value mb-2" id="resWaterLevel">
+            -- <small>m</small>
+          </div>
+          <div class="text-sm text-muted" id="resMessage">
+            Water level is currently within the configured safe operational range.
+          </div>
+        </div>
+
+        <!-- Metrics Grid -->
+        <div class="grid-2">
+          <div class="card card-pad">
+            <span class="mono text-xs text-muted">CONFIDENCE</span>
+            <div class="stat-value text-accent" id="resConfidence">
+              --%
+            </div>
+            <div class="stat-meta">Evidence gradient</div>
+          </div>
+
+          <div class="card card-pad">
+            <span class="mono text-xs text-muted">WATERLINE (Y)</span>
+            <div class="stat-value mono" style="font-size:20px;" id="resWaterline">
+              -- px
+            </div>
+            <div class="stat-meta">Contour boundary</div>
+          </div>
+        </div>
+
+        <!-- Reference Gauge Card -->
+        <div class="card card-pad">
+          <span class="mono text-xs text-muted">REFERENCE / GAUGE CALIBRATION</span>
+          <div class="text-sm text-strong mt-2" id="resReference">
+            <span class="text-accent"><i class="fas fa-check-circle"></i> Detected</span>
+          </div>
+        </div>
+
+        <!-- Email Alert Dispatch Status Card -->
+        <div class="card card-pad" style="border-left: 4px solid var(--accent);">
+          <span class="mono text-xs text-accent">EMERGENCY NOTIFICATION ROUTING</span>
+          <div class="text-sm text-strong mt-2">
+            Recipient: krishnaprasath720@gmail.com
+          </div>
+          <div class="text-xs text-muted mt-1" id="resEmailStatus">
+            Emergency alert dispatch verified. Dispatched automatically upon Warning or Emergency.
+          </div>
+        </div>
+
+        <!-- Actionable Recommendation Card -->
+        <div class="card card-pad" style="border-left: 4px solid var(--safe);">
+          <span class="mono text-xs text-safe">RECOMMENDED ACTION</span>
+          <div class="text-sm mt-2" id="resRecommendation">
+            Continue routine sensor surveillance.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Technical Details Modal -->
+  <div class="modal-overlay" id="techModal">
+    <div class="modal" style="max-width:600px;">
+      <div class="card-header" style="padding:0 0 var(--space-4) 0;">
+        <h3 class="modal-title"><i class="fas fa-code-branch text-accent"></i> Computer Vision Telemetry</h3>
+      </div>
+      <div id="techDetailsBody" class="mt-4" style="max-height:400px; overflow-y:auto; font-size:13px;">
+        <!-- Filled by JS -->
+      </div>
+      <div class="modal-actions">
+        <button onclick="closeTechModal()" class="btn btn-secondary">
+          Close Telemetry
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/analysis.js"></script>
+  <script>
+    function openTechModal() {
+      const modal = document.getElementById('techModal');
+      if (modal) modal.classList.add('active');
+    }
+    function closeTechModal() {
+      const modal = document.getElementById('techModal');
+      if (modal) modal.classList.remove('active');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+/* ==========================================================================
+   RIVERGUARD AI — DASHBOARD & RIVER MONITORING STYLES
+   ========================================================================== */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+@media (max-width: 1080px) {
+  .dashboard-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Viewport Card */
+.river-viewport-card {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: #0B1220;
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-md);
+}
+
+.viewport-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  background: rgba(15, 23, 42, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.viewport-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.viewport-canvas-container {
+  height: 440px;
+  position: relative;
+  background: #030811;
+  overflow: hidden;
+}
+
+.camera-feed-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.viewport-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  background: rgba(15, 23, 42, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 11px;
+}
+
+.viewport-legend {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #94A3B8;
+  font-size: 11px;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+/* Vertical Depth Gauge */
+.vertical-gauge-card {
+  padding: var(--space-5);
+}
+
+.gauge-card-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.gauge-wrapper {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+  height: 220px;
+  margin-bottom: var(--space-4);
+}
+
+.gauge-tube {
+  width: 32px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-full);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.gauge-liquid {
+  width: 100%;
+  border-radius: 0 0 var(--radius-full) var(--radius-full);
+  transition: height 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.4s;
+}
+
+.gauge-scale {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4px 0;
+  font-size: 10.5px;
+  font-family: var(--font-mono);
+}
+
+.gauge-level-mark {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gauge-level-mark .mark-line {
+  width: 12px;
+  height: 1px;
+  background: var(--border-strong);
+}
+
+.gauge-level-mark.danger { color: var(--emergency-text); }
+.gauge-level-mark.danger .mark-line { background: var(--emergency); }
+
+.gauge-level-mark.warning { color: var(--warning-text); }
+.gauge-level-mark.warning .mark-line { background: var(--warning); }
+
+.gauge-level-mark.watch { color: var(--watch-text); }
+.gauge-level-mark.watch .mark-line { background: var(--watch); }
+
+.gauge-level-mark.safe { color: var(--safe-text); }
+.gauge-level-mark.safe .mark-line { background: var(--safe); }
+
+.gauge-current-metric {
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.gauge-readout-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+}
+
+.readout-num {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.readout-unit {
+  font-size: var(--text-xs);
+  color: var(--text-3);
+}
+
+/* Recent alerts inside dashboard */
+.alerts-timeline-card {
+  padding: var(--space-5);
+}
+
+.alert-item-card {
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  margin-bottom: 8px;
+  font-size: var(--text-xs);
+}
+
+.alert-item-card.safe { border-left: 3px solid var(--safe); }
+.alert-item-card.watch { border-left: 3px solid var(--watch); }
+.alert-item-card.warning { border-left: 3px solid var(--warning); }
+.alert-item-card.emergency { border-left: 3px solid var(--emergency); }
+
+.alert-item-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.alert-title {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.alert-time {
+  color: var(--text-4);
+  font-family: var(--font-mono);
+}
+
+.alert-desc {
+  color: var(--text-3);
+  line-height: 1.4;
+}
+
+/* Dispatch alert banners */
+.emergency-auto-dispatch-alert, .warning-auto-dispatch-alert {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.emergency-auto-dispatch-alert {
+  background: var(--emergency-soft);
+  border: 1px solid var(--emergency-border);
+  color: var(--emergency-text);
+}
+
+.warning-auto-dispatch-alert {
+  background: var(--warning-soft);
+  border: 1px solid var(--warning-border);
+  color: var(--warning-text);
+}
+
+/* Responsive Dashboard for Tablets & Mobile */
+@media (max-width: 768px) {
+  .viewport-canvas-container {
+    height: 260px;
+  }
+  .viewport-header {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px 14px;
+  }
+  .viewport-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+  }
+  .viewport-legend {
+    flex-wrap: wrap;
+    gap: 8px 12px;
+  }
+  .gauge-wrapper {
+    height: 180px;
+  }
+}
+

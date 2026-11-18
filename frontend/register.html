@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F0F9FF">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#031122">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Create account — RiverGuard AI</title>
+  <script>document.documentElement.dataset.theme = localStorage.getItem('riverguard_theme') || 'light';</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <main class="auth-page">
+    <div class="auth-card" id="enrollmentCard">
+      <!-- Top Brand Icon & Name (Image 1) -->
+      <div class="auth-brand-badge">
+        <i class="fas fa-water"></i>
+      </div>
+      <div class="auth-brand-title">RiverGuard AI</div>
+      <div class="auth-brand-sub">Smart River Surveillance &amp; Flood Defense</div>
+
+      <!-- Main Headline (Image 1) -->
+      <h1 class="auth-title">Create Account</h1>
+
+      <!-- Tab Switcher (Image 1) -->
+      <div class="auth-tab-switcher">
+        <a href="login.html" class="auth-tab-btn">
+          <i class="fas fa-arrow-right-to-bracket"></i> Sign In
+        </a>
+        <a href="register.html" class="auth-tab-btn active">
+          <i class="fas fa-user-plus"></i> Sign Up
+        </a>
+      </div>
+
+      <form id="registerForm" class="auth-form" novalidate>
+        <div class="field">
+          <label class="label" for="regName">Full name</label>
+          <input type="text" id="regName" class="input" placeholder="e.g. Kaviya Ramesh" autocomplete="name" required>
+        </div>
+
+        <div class="field">
+          <label class="label" for="regPhone">Mobile number</label>
+          <input type="tel" id="regPhone" class="input" placeholder="+91 98765 43210" autocomplete="tel" inputmode="tel" required>
+        </div>
+
+        <div class="field">
+          <label class="label" for="regEmail">Email</label>
+          <input type="email" id="regEmail" class="input" placeholder="name@organisation.gov" autocomplete="email" required>
+        </div>
+
+        <div class="field">
+          <label class="label" for="regPassword">Password</label>
+          <div class="input-group">
+            <input type="password" id="regPassword" class="input" placeholder="At least 6 characters" minlength="6" autocomplete="new-password" required>
+            <button type="button" class="input-group-action" id="toggleRegPasswordBtn" aria-label="Show password">
+              <i class="fas fa-eye" id="toggleRegPasswordIcon"></i>
+            </button>
+          </div>
+        </div>
+
+        <div id="registerError" class="callout callout-danger mb-4 hidden" role="alert">
+          <i class="fas fa-circle-exclamation"></i><span id="registerErrorText"></span>
+        </div>
+
+        <button type="submit" id="btnSubmitRegister" class="btn-auth-primary">
+          <span>Create Operator Account</span> <i class="fas fa-arrow-right"></i>
+        </button>
+      </form>
+
+      <p class="auth-footer">Already have an account? <a href="login.html">Sign In</a></p>
+    </div>
+  </main>
+
+  <script src="js/app.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    (function () {
+      const btn = document.getElementById('toggleRegPasswordBtn');
+      const input = document.getElementById('regPassword');
+      const icon = document.getElementById('toggleRegPasswordIcon');
+      if (btn && input && icon) {
+        btn.addEventListener('click', () => {
+          const show = input.type === 'password';
+          input.type = show ? 'text' : 'password';
+          icon.className = show ? 'fas fa-eye-slash' : 'fas fa-eye';
+          btn.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

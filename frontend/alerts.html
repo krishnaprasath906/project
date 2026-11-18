@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F0F9FF">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#031122">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Flood Alert Center — RiverGuard AI</title>
+  <script>document.documentElement.dataset.theme = localStorage.getItem('riverguard_theme') || 'light';</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="appHeader"></div>
+
+  <main class="page page-wide">
+    <header class="page-header">
+      <div>
+        <span class="eyebrow"><i class="fas fa-tower-broadcast"></i> Active Flood Dispatch Status</span>
+        <h1 class="page-title">Current River Analysis &amp; Emergency Alert</h1>
+        <p class="page-subtitle">
+          Real-time telemetry and active notification status for the most recent AI river scan.
+        </p>
+      </div>
+
+      <div class="page-actions">
+        <a href="alert-history.html" class="btn btn-secondary">
+          <i class="fas fa-history"></i> View Alert History &amp; Timeline
+        </a>
+        <a href="upload.html" class="btn btn-primary">
+          <i class="fas fa-camera"></i> Scan New Image
+        </a>
+      </div>
+    </header>
+
+    <!-- AUTONOMOUS PIPELINE CONFIGURATION BANNER -->
+    <div class="card card-pad mb-6" style="border-left: 4px solid var(--safe);">
+      <div class="row-between mb-3" style="flex-wrap:wrap; gap:8px;">
+        <span class="mono text-xs text-safe text-strong">
+          <i class="fas fa-shield-alt"></i> AUTONOMOUS FLOOD ALERT PIPELINE
+        </span>
+        <span class="badge badge-safe">
+          <span class="status-dot live"></span> Auto-Dispatch Online
+        </span>
+      </div>
+
+      <div class="grid-4 card card-pad mono text-xs" style="background:var(--surface-2); word-break:break-word;">
+        <div>
+          <span class="text-faint" style="display:block; margin-bottom:2px;">ADMIN RECIPIENT:</span>
+          <strong class="text-accent" id="displayRecipientEmail" style="word-break:break-all;">krishnaprasath720@gmail.com</strong>
+          <span id="bannerTargetEmail" style="display:none;"></span>
+        </div>
+        <div>
+          <span class="text-faint" style="display:block; margin-bottom:2px;">DISPATCH SENDER:</span>
+          <strong class="text-safe" id="displaySenderEmail" style="word-break:break-all;">rivergaurd@gmail.com</strong>
+          <span id="bannerSenderEmail" style="display:none;"></span>
+        </div>
+        <div>
+          <span class="text-faint" style="display:block; margin-bottom:2px;">EMERGENCY TRIGGER:</span>
+          <strong class="text-emergency">&ge; 4.80 m (Immediate Alert)</strong>
+        </div>
+        <div>
+          <span class="text-faint" style="display:block; margin-bottom:2px;">WARNING TRIGGER:</span>
+          <strong class="text-warning">&ge; 3.50 m (Active Advisory)</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- CURRENT ANALYSIS SHOWCASE -->
+    <div id="currentAnalysisContainer" class="mb-6">
+      <div class="card card-pad text-center text-muted" style="padding:60px 20px;">
+        <i class="fas fa-circle-notch fa-spin text-accent" style="font-size:28px; margin-bottom:12px;"></i>
+        <p>Loading current river analysis and alert status...</p>
+      </div>
+    </div>
+
+    <!-- 4 STATUS METRIC CARDS -->
+    <div class="row-between mb-3 mt-6">
+      <h3 class="section-title">Telemetry Summary by Risk Level</h3>
+      <a href="alert-history.html" class="card-link">Open Full History Timeline <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="grid-4 mb-6">
+      <div class="card card-pad" style="border-top: 3px solid var(--safe);">
+        <div class="row-between mb-2">
+          <span class="text-xs text-muted text-strong">NORMAL WATER</span>
+          <span class="badge badge-safe">SAFE</span>
+        </div>
+        <div class="stat-value text-safe" id="cntSafe">0</div>
+        <div class="stat-meta">&lt; 2.00m normal operations</div>
+      </div>
+
+      <div class="card card-pad" style="border-top: 3px solid var(--watch);">
+        <div class="row-between mb-2">
+          <span class="text-xs text-muted text-strong">WATCH</span>
+          <span class="badge badge-watch">ADVISORY</span>
+        </div>
+        <div class="stat-value text-watch" id="cntWatch">0</div>
+        <div class="stat-meta">&ge; 2.00m elevated monitoring</div>
+      </div>
+
+      <div class="card card-pad" style="border-top: 3px solid var(--warning);">
+        <div class="row-between mb-2">
+          <span class="text-xs text-muted text-strong">WARNING</span>
+          <span class="badge badge-warning">SURGE</span>
+        </div>
+        <div class="stat-value text-warning" id="cntWarning">0</div>
+        <div class="stat-meta">&ge; 3.50m flood hazard threshold</div>
+      </div>
+
+      <div class="card card-pad" style="border-top: 3px solid var(--emergency);">
+        <div class="row-between mb-2">
+          <span class="text-xs text-muted text-strong">EMERGENCY</span>
+          <span class="badge badge-emergency">CRITICAL</span>
+        </div>
+        <div class="stat-value text-emergency" id="cntEmergency">0</div>
+        <div class="stat-meta">&ge; 4.80m overflow emergency</div>
+      </div>
+    </div>
+
+    <!-- SMTP CONTROLS & MANUAL TEST DISPATCH -->
+    <div class="card card-pad mb-6">
+      <div class="row-between row-wrap">
+        <div>
+          <h4 class="card-title">
+            <i class="fas fa-envelope-open-text text-accent"></i> Dispatch Pipeline Controls
+          </h4>
+          <p class="section-subtitle">
+            Verify automated email alert delivery to <strong>krishnaprasath720@gmail.com</strong>.
+          </p>
+        </div>
+
+        <div class="row">
+          <button id="btnSendTestEmail" class="btn btn-secondary">
+            <i class="fas fa-paper-plane text-safe"></i> Send Test Emergency Alert Email
+          </button>
+          <button id="btnToggleSmtpConfig" class="btn btn-ghost">
+            <i class="fas fa-cog"></i> SMTP Configuration
+          </button>
+        </div>
+      </div>
+
+      <div id="emailTestFeedback" class="mt-4" style="display:none;"></div>
+
+      <!-- Collapsible SMTP Config Panel -->
+      <div id="smtpConfigPanel" class="mt-4 pt-4 divider" style="display:none;">
+        <form id="smtpConfigForm" class="grid-4">
+          <div class="field" style="margin-bottom:0;">
+            <label class="label">SMTP HOST</label>
+            <input type="text" id="smtpHostInput" class="input" value="smtp.gmail.com" required>
+          </div>
+          <div class="field" style="margin-bottom:0;">
+            <label class="label">PORT</label>
+            <input type="number" id="smtpPortInput" class="input" value="587" required>
+          </div>
+          <div class="field" style="margin-bottom:0;">
+            <label class="label">SENDER USERNAME</label>
+            <input type="email" id="smtpUserInput" class="input" value="rivergaurd@gmail.com" required>
+          </div>
+          <div class="field" style="margin-bottom:0;">
+            <label class="label">SENDER APP PASSWORD</label>
+            <input type="password" id="smtpPassInput" class="input" placeholder="••••••••••••••••" autocomplete="current-password">
+          </div>
+          <div class="field" style="grid-column: 1 / -1; margin-bottom:0;">
+            <label class="label">PRIMARY ALERT RECIPIENT</label>
+            <input type="email" id="smtpToInput" class="input" value="krishnaprasath720@gmail.com" required>
+          </div>
+          <div style="grid-column: 1 / -1; display:flex; justify-content:flex-end; gap:10px; margin-top:10px;">
+            <button type="submit" id="btnSaveSmtp" class="btn btn-primary">
+              <i class="fas fa-save"></i> Save Configuration
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="js/app.js"></script>
+  <script src="js/alerts.js"></script>
+</body>
+</html>

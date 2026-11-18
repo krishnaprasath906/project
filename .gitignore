@@ -1,0 +1,36 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+
+# Local Environment Variables & Secrets
+.env
+*.env.local
+
+# Output files & Transient Test Uploads (Preserve benchmark assets and directory structure)
+backend/processed/*
+!backend/processed/.gitkeep
+backend/uploads/2026*
+!backend/uploads/sample_*.jpg
+!backend/uploads/.gitkeep
+
+# Operating System & Editor Files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# AI agent local cache / symlinks
+skills/
+.claude/

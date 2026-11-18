@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F0F9FF">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#031122">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>River Monitoring — RiverGuard AI</title>
+  <script>document.documentElement.dataset.theme = localStorage.getItem('riverguard_theme') || 'light';</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/pages/dashboard.css">
+</head>
+<body>
+
+  <div id="appHeader"></div>
+
+  <main class="page page-wide">
+    <header class="page-header">
+      <div>
+        <span class="eyebrow"><i class="fas fa-tower-broadcast"></i> Live Hydrological Stream</span>
+        <h1 class="page-title">River Monitoring Command Center</h1>
+        <p class="page-subtitle">
+          Real-time hydrological edge monitoring, computer vision telemetry, and water level sensing.
+        </p>
+      </div>
+
+      <div class="page-actions">
+        <span class="badge badge-safe">● Riverside North</span>
+        <a href="upload.html" class="btn btn-primary">
+          <i class="fas fa-camera"></i> Ingest New Image
+        </a>
+      </div>
+    </header>
+
+    <!-- Active High Water Emergency Automated Dispatch Banner -->
+    <div id="dashboardTopAlertBanner" style="display:none;"></div>
+
+    <!-- 2-Column Monitoring Grid -->
+    <div class="dashboard-grid">
+
+      <!-- Central River Monitoring Area -->
+      <div class="stack">
+
+        <!-- Main Viewport Card -->
+        <div class="river-viewport-card">
+          <div class="viewport-header">
+            <div class="viewport-meta">
+              <span style="color:#38BDF8;"><i class="fas fa-crosshairs"></i> AI CV SCANNER</span>
+              <span class="text-faint">OPTICAL SENSOR // SECTOR REACH</span>
+              <span style="color:#22C55E;"><i class="fas fa-signal"></i> CALIBRATED</span>
+            </div>
+            <div class="badge badge-safe" id="viewportStatusPill">
+              ● NORMAL WATER
+            </div>
+          </div>
+
+          <div class="viewport-canvas-container" id="viewportContainer">
+            <canvas id="riverCanvas" style="width:100%; height:100%;"></canvas>
+            <img id="cameraFeedImg" class="camera-feed-img" alt="River Monitoring Camera Feed" style="display:none;">
+            <div class="ai-scanline"></div>
+
+            <div class="waterline-hud-marker" id="waterlineMarker" style="position:absolute; left:0; right:0; top:52%;">
+              <div class="waterline-line" style="color:#16A34A; background:#16A34A; height:2px; box-shadow:0 0 10px #16A34A;"></div>
+              <div class="waterline-badge" id="waterlineBadge" style="position:absolute; right:20px; top:-12px; font-size:10px; padding:2px 8px; border-radius:4px; color:#16A34A; background:rgba(15,23,42,0.9);">
+                WATERLINE (Y: 341px)
+              </div>
+            </div>
+          </div>
+
+          <div class="viewport-footer">
+            <div class="viewport-legend">
+              <div class="legend-item"><span class="legend-dot" style="background:#16A34A;"></span> SAFE (NORMAL)</div>
+              <div class="legend-item"><span class="legend-dot" style="background:#FACC15;"></span> WATCH</div>
+              <div class="legend-item"><span class="legend-dot" style="background:#F97316;"></span> WARNING</div>
+              <div class="legend-item"><span class="legend-dot" style="background:#DC2626;"></span> EMERGENCY</div>
+            </div>
+            <div class="mono text-faint" style="font-size:11px;">
+              ENGINE: <span id="engineStatus" class="text-strong">OpenCV Headless</span> &bull;
+              LAST SCAN: <span id="lastAnalysisTime" class="text-strong">--</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Stats Cards -->
+        <div class="grid-4">
+          <div class="card stat">
+            <div class="stat-label">
+              <span>WATER LEVEL</span>
+              <i class="fas fa-ruler-vertical text-safe"></i>
+            </div>
+            <div class="stat-value text-safe" id="statWaterLevel">--</div>
+            <div class="stat-meta">Calibrated depth sensor</div>
+          </div>
+
+          <div class="card stat">
+            <div class="stat-label">
+              <span>RISK STATUS</span>
+              <i class="fas fa-shield-alt text-safe"></i>
+            </div>
+            <div style="margin: 8px 0;">
+              <span class="badge badge-safe" id="statRiskStatus">● NORMAL WATER</span>
+            </div>
+            <div class="stat-meta">Safe operating limits</div>
+          </div>
+
+          <div class="card stat">
+            <div class="stat-label">
+              <span>AI CONFIDENCE</span>
+              <i class="fas fa-brain text-accent"></i>
+            </div>
+            <div class="stat-value text-accent" id="statConfidence">--</div>
+            <div class="stat-meta">Evidence gradient index</div>
+          </div>
+
+          <div class="card stat">
+            <div class="stat-label">
+              <span>CRITICAL ALERTS</span>
+              <i class="fas fa-bell text-warning"></i>
+            </div>
+            <div class="stat-value text-strong" id="statAlertsCount">0</div>
+            <div class="stat-meta">Warning / Emergency count</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Panel: Vertical Depth Gauge & Recent Alerts -->
+      <div class="stack">
+
+        <!-- River Depth Gauge -->
+        <div class="card vertical-gauge-card">
+          <div class="gauge-card-title">
+            <h3 class="card-title"><i class="fas fa-tachometer-alt text-accent"></i> River Depth Gauge</h3>
+            <span class="mono text-xs text-faint">SECTOR 04</span>
+          </div>
+
+          <div class="gauge-wrapper">
+            <div class="gauge-tube">
+              <div class="gauge-liquid" id="gaugeLiquid" style="height:32%;"></div>
+            </div>
+
+            <div class="gauge-scale">
+              <div class="gauge-level-mark danger">
+                <div class="mark-line"></div>
+                <div>
+                  <div>EMERGENCY</div>
+                  <div class="mono text-faint" style="font-size:9.5px;">&ge; 4.80 m</div>
+                </div>
+              </div>
+
+              <div class="gauge-level-mark warning">
+                <div class="mark-line"></div>
+                <div>
+                  <div>WARNING</div>
+                  <div class="mono text-faint" style="font-size:9.5px;">&ge; 3.50 m</div>
+                </div>
+              </div>
+
+              <div class="gauge-level-mark watch">
+                <div class="mark-line"></div>
+                <div>
+                  <div>WATCH</div>
+                  <div class="mono text-faint" style="font-size:9.5px;">&ge; 2.00 m</div>
+                </div>
+              </div>
+
+              <div class="gauge-level-mark safe">
+                <div class="mark-line"></div>
+                <div>
+                  <div>SAFE (NORMAL)</div>
+                  <div class="mono text-faint" style="font-size:9.5px;">&lt; 2.00 m</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gauge-current-metric">
+            <div class="gauge-readout-row">
+              <span class="mono text-xs text-muted">READOUT:</span>
+              <div class="readout-num" id="gaugeReadoutNum">
+                --<span class="readout-unit">m</span>
+              </div>
+            </div>
+
+            <div class="mt-2 text-center">
+              <span class="badge badge-safe" id="gaugeStatusBadge">● NORMAL WATER</span>
+            </div>
+
+            <div class="callout callout-warning mt-2 text-xs" id="gaugeCalibNote" style="display:none;"></div>
+          </div>
+        </div>
+
+        <!-- Recent Alerts Timeline -->
+        <div class="card alerts-timeline-card">
+          <div class="card-header" style="padding:0 0 var(--space-3) 0;">
+            <h4 class="card-title"><i class="fas fa-bell text-accent"></i> Recent Alerts</h4>
+            <a href="alerts.html" class="card-link">View All</a>
+          </div>
+
+          <div class="alerts-list mt-3" id="dashboardAlertsList"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Emergency Modal -->
+  <div class="modal-overlay" id="emergencyModal">
+    <div class="modal" style="border-color:var(--emergency);">
+      <div class="modal-icon">
+        <i class="fas fa-triangle-exclamation"></i>
+      </div>
+
+      <h2 class="modal-title text-emergency">
+        FLOOD EMERGENCY DETECTED
+      </h2>
+
+      <p class="modal-text">
+        Critical river water level detected. An automated emergency notification is being dispatched.
+      </p>
+
+      <div class="grid-3 mt-4 mb-4 card card-pad" style="background:var(--surface-2); text-align:center;">
+        <div>
+          <div class="text-xs text-faint">WATER LEVEL</div>
+          <div class="text-lg text-strong text-emergency" id="emergencyWaterLevel">--</div>
+        </div>
+        <div>
+          <div class="text-xs text-faint">CONFIDENCE</div>
+          <div class="text-lg text-strong text-accent" id="emergencyConfidence">--</div>
+        </div>
+        <div>
+          <div class="text-xs text-faint">TIME</div>
+          <div class="text-sm text-strong" id="emergencyTimestamp">Active</div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button onclick="closeEmergencyModal()" class="btn btn-secondary">
+          Acknowledge &amp; Close
+        </button>
+        <a href="alerts.html" class="btn btn-danger">
+          <i class="fas fa-bullhorn"></i> Open Alert Center
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

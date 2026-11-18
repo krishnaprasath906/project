@@ -1,0 +1,799 @@
+/* ==========================================================================
+   RIVERGUARD AI — OPERATOR ACCESS CONTROL & VERIFICATION STYLES
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. TOP SECURITY METRICS GRID
+   -------------------------------------------------------------------------- */
+.verification-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.verification-stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  transition: transform var(--duration-fast), box-shadow var(--duration-fast);
+}
+
+.verification-stat-card:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.v-card-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.v-card-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-3);
+  text-transform: uppercase;
+}
+
+.v-card-icon-hub {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.v-card-icon-hub.blue {
+  background: #E0F2FE;
+  color: #0284C7;
+  border: none;
+}
+
+.v-card-icon-hub.green {
+  background: #DCFCE7;
+  color: #15803D;
+  border: none;
+}
+
+.v-card-icon-hub.amber {
+  background: #FEF3C7;
+  color: #B45309;
+  border: none;
+}
+
+.v-card-icon-hub.emerald {
+  background: #D1FAE5;
+  color: #059669;
+  border: none;
+}
+
+.v-card-num {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.1;
+  font-family: var(--font-sans);
+  letter-spacing: -0.02em;
+}
+
+.v-card-sub {
+  font-size: 12px;
+  color: var(--text-3);
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   2. PROFILE TABS NAVIGATION
+   -------------------------------------------------------------------------- */
+.profile-tabs-wrapper {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: var(--space-2);
+}
+
+.profile-tabs-list {
+  display: inline-flex;
+  gap: var(--space-2);
+}
+
+.profile-tab-btn {
+  height: 40px;
+  padding: 0 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-3);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+
+.profile-tab-btn i {
+  font-size: 14px;
+  color: var(--text-4);
+  transition: color var(--duration-fast);
+}
+
+.profile-tab-btn:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.profile-tab-btn:hover i {
+  color: var(--accent);
+}
+
+.profile-tab-btn.active {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-xs);
+}
+
+.profile-tab-btn.active i {
+  color: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   3. REFERENCE DESIGN 3 — REGISTERED OPERATOR ACCOUNTS TABLE
+   -------------------------------------------------------------------------- */
+.ref-table-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px 28px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.ref-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+
+.ref-card-header-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.ref-card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ref-card-header-icon {
+  font-size: 18px;
+  color: var(--accent);
+}
+
+.ref-card-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.ref-card-subtitle {
+  font-size: 13px;
+  color: var(--text-3);
+  margin: 4px 0 0 0;
+  font-weight: 400;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.ref-search-wrap {
+  position: relative;
+  width: 320px;
+  max-width: 100%;
+}
+
+.ref-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-4);
+  font-size: 13px;
+  pointer-events: none;
+}
+
+.ref-search-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 36px 0 38px;
+  border-radius: 9999px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 13px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  outline: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.ref-search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.18);
+}
+
+.ref-search-input::placeholder {
+  color: var(--text-4);
+}
+
+.ref-search-clear {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-3);
+  cursor: pointer;
+  font-size: 12px;
+  padding: 4px;
+}
+
+.ref-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 12px;
+}
+
+.ref-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.ref-table thead tr {
+  background-color: #E0F2FE;
+}
+
+[data-theme="dark"] .ref-table thead tr {
+  background-color: rgba(14, 165, 233, 0.15);
+}
+
+.ref-table th {
+  padding: 14px 18px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #0369A1;
+  text-transform: uppercase;
+  border: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .ref-table th {
+  color: #7DD3FC;
+}
+
+.ref-table th.th-name {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  text-align: left;
+}
+
+.ref-table th.th-email,
+.ref-table th.th-role,
+.ref-table th.th-phone,
+.ref-table th.th-since {
+  text-align: left;
+}
+
+.ref-table th.th-status,
+.ref-table th.th-action,
+.ref-table th.th-delete {
+  text-align: center;
+}
+
+.ref-table th.th-delete {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.ref-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.15s ease;
+}
+
+.ref-table tbody tr:hover {
+  background-color: var(--surface-2);
+}
+
+.ref-table td {
+  padding: 16px 18px;
+  vertical-align: middle;
+  font-size: 13px;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  border: none;
+}
+
+.ref-col-name {
+  font-weight: 600;
+  color: var(--text);
+  font-size: 13.5px;
+  letter-spacing: -0.01em;
+}
+
+.ref-col-email {
+  font-weight: 400;
+  color: var(--text-2);
+  font-size: 13px;
+}
+
+.ref-col-role {
+  font-weight: 500;
+  color: var(--text-3);
+  font-size: 13px;
+  text-transform: capitalize;
+}
+
+.ref-col-phone {
+  font-weight: 500;
+  color: var(--text-2);
+  font-size: 13px;
+}
+
+.ref-status-pill {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.ref-status-pill.active {
+  background-color: #E8F7ED;
+  color: #15803D;
+}
+
+[data-theme="dark"] .ref-status-pill.active {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: #4ADE80;
+}
+
+.ref-status-pill.pending {
+  background-color: #FEF3C7;
+  color: #B45309;
+}
+
+[data-theme="dark"] .ref-status-pill.pending {
+  background-color: rgba(245, 158, 11, 0.2);
+  color: #FBBF24;
+}
+
+.ref-col-since {
+  font-weight: 400;
+  color: var(--text-3);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.ref-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: var(--surface);
+  transition: all 0.15s ease;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.ref-btn-outline.red {
+  border: 1px solid #FECDD3;
+  color: #E11D48;
+}
+
+.ref-btn-outline.red:hover {
+  background-color: #FFF1F2;
+  border-color: #FDA4AF;
+}
+
+[data-theme="dark"] .ref-btn-outline.red {
+  border-color: rgba(225, 29, 72, 0.4);
+  color: #FB7185;
+}
+
+[data-theme="dark"] .ref-btn-outline.red:hover {
+  background-color: rgba(225, 29, 72, 0.15);
+}
+
+.ref-btn-outline.green {
+  border: 1px solid #86EFAC;
+  color: #16A34A;
+}
+
+.ref-btn-outline.green:hover {
+  background-color: #F0FDF4;
+  border-color: #4ADE80;
+}
+
+[data-theme="dark"] .ref-btn-outline.green {
+  border-color: rgba(22, 163, 74, 0.4);
+  color: #4ADE80;
+}
+
+[data-theme="dark"] .ref-btn-outline.green:hover {
+  background-color: rgba(22, 163, 74, 0.15);
+}
+
+.ref-muted-text {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text-4);
+  font-style: italic;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.ref-table-loading {
+  text-align: center;
+  padding: 44px 20px;
+  color: var(--text-3);
+  font-size: 14px;
+}
+
+/* --------------------------------------------------------------------------
+   4. NON-ADMIN SECURITY CLEARANCE DOSSIER
+   -------------------------------------------------------------------------- */
+.clearance-dossier-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6) var(--space-8);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.clearance-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--border);
+}
+
+.clearance-user-profile {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.clearance-avatar-lg {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 800;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+}
+
+.clearance-user-name {
+  font-family: var(--font-sans);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.clearance-user-meta {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  color: var(--text-3);
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.clearance-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.clearance-status-pill.approved {
+  background: var(--safe-soft);
+  color: var(--safe-text);
+  border: 1px solid var(--safe-border);
+}
+
+.clearance-status-pill.pending {
+  background: var(--watch-soft);
+  color: var(--watch-text);
+  border: 1px solid var(--watch-border);
+}
+
+/* Notice Alert Box */
+.clearance-notice-box {
+  padding: 18px 22px;
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-6);
+  border: 1px solid transparent;
+}
+
+.clearance-notice-box.pending {
+  background: var(--watch-soft);
+  border-color: var(--watch-border);
+}
+
+.clearance-notice-box.approved {
+  background: var(--safe-soft);
+  border-color: var(--safe-border);
+}
+
+.clearance-notice-header {
+  font-weight: 700;
+  font-size: var(--text-sm);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.02em;
+}
+
+.clearance-notice-box.pending .clearance-notice-header {
+  color: var(--watch-text);
+}
+
+.clearance-notice-box.approved .clearance-notice-header {
+  color: var(--safe-text);
+}
+
+.clearance-notice-body {
+  font-size: var(--text-sm);
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+/* Milestone Progression Stepper */
+.clearance-steps-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: var(--space-5);
+}
+
+.clearance-step-item {
+  padding: 18px 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  transition: border-color var(--duration-fast);
+}
+
+.clearance-step-item.done {
+  border-color: var(--safe-border);
+  background: var(--safe-soft);
+}
+
+.clearance-step-item.pending {
+  border-color: var(--watch-border);
+  background: var(--watch-soft);
+}
+
+.clearance-step-item.locked {
+  border-color: var(--border);
+  opacity: 0.75;
+}
+
+.stepper-step-tag {
+  font-size: 11px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.clearance-step-item.done .stepper-step-tag {
+  color: var(--safe-text);
+}
+
+.clearance-step-item.pending .stepper-step-tag {
+  color: var(--watch-text);
+}
+
+.clearance-step-item.locked .stepper-step-tag {
+  color: var(--text-4);
+}
+
+.clearance-step-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.clearance-step-meta {
+  font-size: 12px;
+  color: var(--text-3);
+  margin-top: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   5. OPERATOR PROFILE & SECURITY CREDENTIALS FORM
+   -------------------------------------------------------------------------- */
+.profile-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-6);
+}
+
+.profile-card-subpanel {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+
+.subpanel-title {
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.field-hint {
+  display: block;
+  font-size: 11.5px;
+  color: var(--text-3);
+  margin-top: 4px;
+}
+
+.input-group-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px;
+  background: var(--surface-3);
+  color: var(--text-3);
+  font-size: 12px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  border-left: 1px solid var(--border);
+}
+
+.profile-form-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border);
+}
+
+/* --------------------------------------------------------------------------
+   6. RESPONSIVE PROFILE & ROSTER (Tablet & Mobile Views)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .verification-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .verification-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .verification-stat-card {
+    padding: 14px 16px;
+    border-radius: 14px;
+  }
+  .v-card-num {
+    font-size: 24px;
+  }
+  
+  .profile-tabs-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+  }
+  .profile-tabs-list {
+    display: flex;
+    white-space: nowrap;
+    min-width: max-content;
+  }
+
+  .ref-table-card {
+    padding: 16px 12px;
+    border-radius: 14px;
+  }
+  .ref-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .ref-search-wrap {
+    width: 100%;
+  }
+
+  .profile-form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .profile-card-subpanel {
+    padding: 16px 14px;
+  }
+  .profile-form-footer {
+    justify-content: stretch;
+  }
+  .profile-form-footer .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .verification-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+  .ref-card-title {
+    font-size: 17px;
+  }
+}

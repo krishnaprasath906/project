@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F0F9FF">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#031122">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>User Verification &amp; Settings — RiverGuard AI</title>
+  <script>document.documentElement.dataset.theme = localStorage.getItem('riverguard_theme') || 'light';</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/pages/profile.css">
+</head>
+<body>
+
+  <div id="appHeader"></div>
+
+  <main class="page page-wide">
+    <header class="page-header" style="display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:16px;">
+      <div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <h1 class="page-title" id="profilePageTitle" style="font-size:26px; font-weight:800; color:var(--text); letter-spacing:-0.02em; margin:0;">
+            Platform Administration &amp; Governance
+          </h1>
+          <span class="badge" id="profilePrivilegedBadge" style="background:#FEF3C7; color:#92400E; font-weight:700; font-size:11px; padding:3px 8px; border-radius:6px; letter-spacing:0.04em;">PRIVILEGED</span>
+        </div>
+        <p class="page-subtitle" id="profilePageSubtitle" style="margin-top:4px; font-size:13.5px; color:var(--text-3);">
+          Oversee registered operator accounts, monitor system surveillance clearance, and manage credentials.
+        </p>
+      </div>
+      <div>
+        <button type="button" class="btn btn-secondary" id="btnRefreshData" onclick="loadUsersList()" style="box-shadow: 0 1px 2px rgba(0,0,0,0.05); font-weight:600; display:inline-flex; align-items:center; gap:8px;">
+          <i class="fas fa-rotate"></i> Refresh Platform Data
+        </button>
+      </div>
+    </header>
+
+    <!-- Top Security Metrics Grid (Image 3) -->
+    <div class="verification-metrics-grid" id="profileMetricsGrid">
+      <div class="verification-stat-card">
+        <div class="v-card-top-row">
+          <span class="v-card-label">TOTAL REGISTERED OPERATORS</span>
+          <div class="v-card-icon-hub green">
+            <i class="fas fa-users"></i>
+          </div>
+        </div>
+        <div class="v-card-num" id="statTotalUsers">0</div>
+        <div class="v-card-sub"><span id="statActiveFarmersCount">3</span> active operators</div>
+      </div>
+
+      <div class="verification-stat-card">
+        <div class="v-card-top-row">
+          <span class="v-card-label">OPERATIONAL (APPROVED)</span>
+          <div class="v-card-icon-hub blue">
+            <i class="fas fa-shield-check"></i>
+          </div>
+        </div>
+        <div class="v-card-num text-safe" id="statVerifiedUsers">0</div>
+        <div class="v-card-sub">Full camera &amp; AI clearance</div>
+      </div>
+
+      <div class="verification-stat-card">
+        <div class="v-card-top-row">
+          <span class="v-card-label">VIEW-ONLY (PENDING)</span>
+          <div class="v-card-icon-hub amber">
+            <i class="fas fa-user-clock"></i>
+          </div>
+        </div>
+        <div class="v-card-num text-watch" id="statPendingUsers">0</div>
+        <div class="v-card-sub">Awaiting admin access grant</div>
+      </div>
+
+      <div class="verification-stat-card">
+        <div class="v-card-top-row">
+          <span class="v-card-label">SURVEILLANCE STATIONS</span>
+          <div class="v-card-icon-hub emerald">
+            <i class="fas fa-tower-broadcast"></i>
+          </div>
+        </div>
+        <div class="v-card-num" id="statActiveStations">3</div>
+        <div class="v-card-sub">Active field telemetry stations</div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs (Roster / Dossier / Settings) -->
+    <div class="profile-tabs-wrapper mb-6">
+      <div class="profile-tabs-list" id="profileTabsNav" role="tablist">
+        <button type="button" class="profile-tab-btn active" id="tabPrimaryView" role="tab" aria-selected="true">
+          <i class="fas fa-users-gear" id="tabPrimaryIcon"></i>
+          <span id="tabPrimaryLabel">Station Personnel Roster</span>
+        </button>
+        <button type="button" class="profile-tab-btn" id="tabSettingsView" role="tab" aria-selected="false">
+          <i class="fas fa-user-gear"></i>
+          <span>Profile &amp; Credentials</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- PANEL 1: REGISTERED OPERATOR ACCOUNTS (IMAGE 3 MATCH)     -->
+    <!-- ======================================================== -->
+    <section id="adminUserManagementPanel" class="ref-table-card mb-6" style="display:none;" aria-labelledby="tabPrimaryView">
+      <div class="ref-card-header">
+        <div class="ref-card-header-left">
+          <div class="ref-card-title-row">
+            <i class="fas fa-user-friends ref-card-header-icon"></i>
+            <h2 class="ref-card-title">Registered Operator Accounts</h2>
+          </div>
+          <p class="ref-card-subtitle">Manage accounts and enforce authorization security</p>
+        </div>
+
+        <div class="ref-search-wrap">
+          <i class="fas fa-search ref-search-icon"></i>
+          <input type="text" id="rosterSearchInput" class="ref-search-input" placeholder="Search user, email, or mobile...">
+          <button type="button" id="rosterSearchClearBtn" class="ref-search-clear" style="display:none;" aria-label="Clear search">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Users Table (8 Exact Columns Matching Reference Image 3) -->
+      <div class="ref-table-wrapper">
+        <table class="ref-table">
+          <thead>
+            <tr>
+              <th class="th-name">NAME</th>
+              <th class="th-email">EMAIL ID</th>
+              <th class="th-role">ROLE</th>
+              <th class="th-phone">MOBILE NUMBER</th>
+              <th class="th-status">ACCOUNT STATUS</th>
+              <th class="th-since">MEMBER SINCE</th>
+              <th class="th-action">SECURITY ACTION</th>
+              <th class="th-delete">DELETE</th>
+            </tr>
+          </thead>
+          <tbody id="usersTableBody">
+            <tr>
+              <td colspan="8" class="ref-table-loading">
+                <i class="fas fa-circle-notch fa-spin text-accent"></i> Loading operator profiles...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- PANEL 2: NON-ADMIN SECURITY CLEARANCE DOSSIER            -->
+    <!-- ======================================================== -->
+    <section id="operatorVerificationStatusBanner" class="mb-6" style="display:none;"></section>
+
+    <!-- ======================================================== -->
+    <!-- PANEL 3: OPERATOR PROFILE & SECURITY CREDENTIALS         -->
+    <!-- ======================================================== -->
+    <section id="personalProfileSettingsPanel" class="card card-pad mb-6" style="display:none;" aria-labelledby="tabSettingsView">
+      <div class="profile-section-header mb-4">
+        <div>
+          <span class="mono text-xs text-accent text-strong">
+            <i class="fas fa-user-lock"></i> OPERATOR DOSSIER SETTINGS
+          </span>
+          <h2 class="card-title mt-1">Profile Information &amp; Security Credentials</h2>
+          <p class="section-subtitle">
+            Update your registered station contact information and manage your login security password.
+          </p>
+        </div>
+      </div>
+
+      <form id="profileForm" novalidate>
+        <div class="profile-form-grid">
+          
+          <!-- Column 1: Identity & Station Info -->
+          <div class="profile-card-subpanel">
+            <h3 class="subpanel-title"><i class="fas fa-address-card text-accent"></i> Identity Information</h3>
+            
+            <div class="field">
+              <label class="label" for="profName">Full name</label>
+              <input type="text" id="profName" class="input" placeholder="e.g. Krishnaprasath S" required>
+            </div>
+
+            <div class="field">
+              <label class="label" for="profPhone">Registered mobile number</label>
+              <input type="tel" id="profPhone" class="input" placeholder="+91 98765 43210" required>
+              <span class="field-hint">Used for primary station identification and automated alerts.</span>
+            </div>
+
+            <div class="field">
+              <label class="label" for="profEmail">Station email (Identifier)</label>
+              <div class="input-group">
+                <input type="email" id="profEmail" class="input" disabled>
+                <span class="input-group-badge"><i class="fas fa-lock"></i> Primary Key</span>
+              </div>
+            </div>
+
+            <div class="field" style="margin-bottom:0;">
+              <label class="label" for="profRole">Assigned operational rank</label>
+              <input type="text" id="profRole" class="input" disabled>
+            </div>
+          </div>
+
+          <!-- Column 2: Password & Authentication -->
+          <div class="profile-card-subpanel">
+            <h3 class="subpanel-title"><i class="fas fa-key text-accent"></i> Security &amp; Password</h3>
+            
+            <div class="field">
+              <label class="label" for="profNewPass">New password</label>
+              <div class="input-group">
+                <input type="password" id="profNewPass" class="input" placeholder="Leave blank to keep current password" minlength="6" autocomplete="new-password">
+                <button type="button" class="input-group-action" id="toggleProfPassBtn" aria-label="Toggle password visibility">
+                  <i class="fas fa-eye" id="toggleProfPassIcon"></i>
+                </button>
+              </div>
+              <span class="field-hint">Minimum 6 characters. Choose a strong security phrase.</span>
+            </div>
+
+            <div class="field">
+              <label class="label" for="profConfirmPass">Confirm new password</label>
+              <div class="input-group">
+                <input type="password" id="profConfirmPass" class="input" placeholder="Re-enter new password" minlength="6" autocomplete="new-password">
+                <button type="button" class="input-group-action" id="toggleProfConfirmPassBtn" aria-label="Toggle confirm password visibility">
+                  <i class="fas fa-eye" id="toggleProfConfirmPassIcon"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="callout callout-info mt-4" style="margin-bottom:0;">
+              <i class="fas fa-shield-alt"></i>
+              <div style="font-size:var(--text-xs); line-height:1.5;">
+                Your security credentials authenticate access to hydrological telemetry and optical sensor hardware.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="profile-form-footer mt-6">
+          <button type="submit" id="btnSaveProfile" class="btn btn-primary btn-lg">
+            <i class="fas fa-save"></i> Save Profile Settings
+          </button>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- Confirmation Modal for Operator Deletion (Matching Image 4 Style) -->
+  <div class="confirm-logout-modal-overlay" id="deleteConfirmModal" role="dialog" aria-modal="true">
+    <div class="confirm-logout-card">
+      <div class="logout-icon-circle">
+        <i class="far fa-trash-alt"></i>
+      </div>
+      <h3 class="logout-card-title">Confirm Deletion</h3>
+      <p class="logout-card-desc" id="deleteConfirmMessage">
+        Are you sure you want to permanently delete this operator account? All sensor and surveillance access privileges will be revoked.
+      </p>
+      <div class="logout-card-actions">
+        <button type="button" class="btn-logout-cancel" id="btnCancelDelete">Cancel</button>
+        <button type="button" class="btn-logout-confirm" id="btnConfirmDelete">
+          <i class="far fa-trash-alt"></i> Yes, Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

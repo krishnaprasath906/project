@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F0F9FF">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#031122">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Overview — RiverGuard AI</title>
+  <meta name="description" content="AI-assisted water level monitoring and early flood detection platform utilizing computer vision, edge detection, and real-time hydrological analysis.">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('riverguard_theme') || 'light';</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/pages/index.css">
+</head>
+<body>
+
+  <div id="appHeader"></div>
+
+  <main class="page">
+    <section class="hero-section">
+      <!-- Left Column: Copy & Actions -->
+      <div class="hero-content">
+        <span class="eyebrow">
+          <i class="fas fa-shield-alt"></i> Verified Flood Intelligence Platform
+        </span>
+
+        <h1 class="hero-title">
+          See Rising Water.<br>
+          Act Before It Floods.
+        </h1>
+
+        <p class="hero-subtitle">
+          RiverGuard AI analyses verified field images of rivers and dams, extracts a precise waterline, estimates hydrological risk, and escalates early flood warnings to control centers.
+        </p>
+
+        <div class="row row-wrap">
+          <a href="upload.html" class="btn btn-primary btn-lg">
+            <i class="fas fa-camera"></i> Live Camera &amp; Image Analysis
+          </a>
+          <a href="alerts.html" class="btn btn-secondary btn-lg">
+            <i class="fas fa-bell text-emergency"></i> Live Flood Alerts
+          </a>
+        </div>
+
+        <!-- Three Key Metrics -->
+        <div class="hero-metrics">
+          <div class="hero-metric-item">
+            <span class="hero-metric-val">98.7%</span>
+            <span class="hero-metric-lbl">Waterline Accuracy</span>
+          </div>
+          <div class="hero-metric-item">
+            <span class="hero-metric-val">&lt; 90s</span>
+            <span class="hero-metric-lbl">Alert Routing</span>
+          </div>
+          <div class="hero-metric-item">
+            <span class="hero-metric-val">24 / 7</span>
+            <span class="hero-metric-lbl">Hydrological Monitoring</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Visual Showcase Card -->
+      <div class="hero-visual-frame">
+        <img src="images/hero_sunset.jpg" alt="River Basin at Sunset with AI Waterline Extraction" class="hero-visual-img">
+        
+        <!-- Waterline -->
+        <div class="hero-waterline-datum"></div>
+
+        <!-- Floating Analysis Card -->
+        <div class="hero-floating-card">
+          <div class="hero-card-header">
+            <span class="status-dot live"></span>
+            <span>Riverside North &bull; Latest analysis</span>
+          </div>
+
+          <div class="hero-card-readout">
+            <span class="hero-card-num">4.00</span>
+            <span class="hero-card-unit">Metres</span>
+          </div>
+
+          <div class="hero-card-sub">
+            <i class="fas fa-ruler-vertical"></i>
+            <span>Detected waterline &ndash; 4.00 m</span>
+          </div>
+
+          <div class="hero-card-footer">
+            <span>Threshold: 3.50 m</span>
+            <span class="badge badge-warning">High Risk</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMAND MODULE SHORTCUTS -->
+    <section class="overview-section" style="margin-top: var(--space-8); margin-bottom: var(--space-8);">
+      <div class="overview-section-header">
+        <span class="eyebrow"><i class="fas fa-compass"></i> Monitoring Consoles</span>
+        <h2 class="section-title">Quick Access Consoles</h2>
+        <p class="section-subtitle">Direct links to real-time telemetry, live cameras, and notification dispatches.</p>
+      </div>
+
+      <div class="modules-grid">
+        <a href="dashboard.html" class="module-card">
+          <div class="module-icon"><i class="fas fa-tower-broadcast"></i></div>
+          <h3 class="module-title">Live River Monitor <i class="fas fa-arrow-right text-xs text-muted"></i></h3>
+          <p class="module-desc">Continuous real-time river water level gauge and active sensor monitoring.</p>
+          <span class="module-link">Open Dashboard &rarr;</span>
+        </a>
+
+        <a href="upload.html" class="module-card">
+          <div class="module-icon"><i class="fas fa-camera"></i></div>
+          <h3 class="module-title">Analyse River Image <i class="fas fa-arrow-right text-xs text-muted"></i></h3>
+          <p class="module-desc">Upload river photos or capture camera frames for automated water level analysis.</p>
+          <span class="module-link">Analyse Image &rarr;</span>
+        </a>
+
+        <a href="alerts.html" class="module-card">
+          <div class="module-icon"><i class="fas fa-bell text-warning"></i></div>
+          <h3 class="module-title">Active Alerts <i class="fas fa-arrow-right text-xs text-muted"></i></h3>
+          <p class="module-desc">View real-time flood warning dispatches, telemetry status, and email alerts.</p>
+          <span class="module-link">View Alerts &rarr;</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
