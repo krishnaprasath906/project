@@ -170,7 +170,7 @@ function renderAppHeader(u) {
     <aside class="app-sidebar" id="appSidebar" aria-label="Primary">
       <div class="sidebar-brand">
         <a href="index.html" class="brand" aria-label="RiverGuard AI home">
-          <span class="brand-mark"><img src="images/logo.svg" alt="RiverGuard AI" class="brand-logo-img"></span>
+          <span class="brand-mark"><img src="images/logo.png" alt="RiverGuard AI" class="brand-logo-img"></span>
           <div class="brand-title-wrap">
             <span class="brand-name">RiverGuard<span>AI</span></span>
             <span class="brand-sub">Smart River Suite</span>
