@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="favShield" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0EA5E9" />
+      <stop offset="50%" stop-color="#0284C7" />
+      <stop offset="100%" stop-color="#0369A1" />
+    </linearGradient>
+    <linearGradient id="favWave" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#FFFFFF" />
+    </linearGradient>
+  </defs>
+
+  <path d="M50 6 C69 6, 88 15, 88 38 C88 64, 50 94, 50 94 C50 94, 12 64, 12 38 C12 15, 31 6, 50 6 Z" 
+        fill="url(#favShield)" />
+
+  <path d="M20 54 C30 46, 42 62, 54 54 C66 46, 76 56, 80 52 C81 57, 80 63, 76 69 C68 79, 50 87, 50 87 C50 87, 32 79, 24 69 C21 64, 20 59, 20 54 Z" 
+        fill="#38BDF8" />
+
+  <path d="M23 63 C33 57, 44 69, 56 63 C65 59, 73 65, 76 62 C74 68, 69 74, 64 78 C57 83, 50 85.5, 50 85.5 C50 85.5, 43 83, 36 78 C31 74, 26 68, 23 63 Z" 
+        fill="url(#favWave)" />
+
+  <circle cx="50" cy="40" r="5" fill="#FFFFFF" />
+  <circle cx="50" cy="40" r="2.5" fill="#0284C7" />
+</svg>
